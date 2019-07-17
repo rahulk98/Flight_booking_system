@@ -1,0 +1,66 @@
+<html>
+    <head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <title>Home</title>
+    </head>
+    <body >
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-between">
+
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">BookMyFlight.com</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="signup.html">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="bg-image"></div>
+        <div class="booking-form-box">
+            <div class="bg-image"></div>
+            <div class="radio-btn">
+                <input type="radio" class="btn" name="check" checked="checked"><span>Roundtrip</span>
+                <input type="radio" class="btn" name="check"><span>One-way</span>
+                <div class="booking-form">
+                    <label>Source city</label>
+                        <input type="text" class="form-control" placeholder="City or Airport">
+                    <label>Destination city</label>
+                    <input type="text" class="form-control" placeholder="City or Airport">
+                    <div class="input-grp">
+                        <label>Date of Journey</label>
+                        <input type="date" class="form-control select-date">
+                        <label>Date of Return</label>
+                        <input type="date" class="form-control select-date">
+                    </div>
+                    <div class="input-grp">
+                        <label>Adults</label>
+                        <input type="number" class="form-control" value="1">
+                      <label>Children</label>
+                      <input type="number" class="form-control" value="0">
+                </div>
+                <div class="input-grp">
+                    <label>Class</label>
+                    <select class="custom-select">
+                        <option value="1" >Economy class</option>
+                        <option value="2">Business class</option>
+                    </select>
+                    
+                </div>
+                <div class="input-grp">
+                    <button type="button" class="btn btn-primary " style="margin-left: 10px; ">Show flights</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html> 
