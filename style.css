@@ -9,7 +9,7 @@ body
 .booking-form-box{
     max-width: 400px;
     border: 1px solid black;
-    margin:10% auto 0;
+    margin:6% auto 0;
     background-color: #b2b2b2;
     background-color: rgba(0, 0, 0, .3);
 }
@@ -25,7 +25,6 @@ body
     margin-right: 20px;
 }
 .booking-form{
-
     padding: 0px 15px 15px;
 }
 .booking-form label{
@@ -34,12 +33,8 @@ body
     margin-top: 10px;
     font-size:12px; 
 }
-.input-grp{
-    width: 151px;
-    display: inline-block;
-}
 .form-control{
     font-size: 12px;
-    border-radius: 2px;
-    
+    color: #fff;
+    box-shadow: none;
 }
