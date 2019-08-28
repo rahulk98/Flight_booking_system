@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title> Login </title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -29,30 +29,93 @@
 <br>
 <br>
 <br>
+
 <style>
+
+body{
+    margin: 0;
+    padding: 0;
+    background: url(assets/images/loginimage.jpg);
+    background-repeat:no-repeat; 
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+
+
 .wrap{
-width: 450px;
+width: 400px;
+height: 370px;
 padding: 40px;
-border: 1px solid black;
-margin-top: 12%;
-margin-left: 25%; 
-text-align: center;
+border: 1.2px solid white;
+margin-top: 10%;
+margin-left: 35%; 
+background-color: rgba(0,0,0,0.5);
 
 }
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.wrap input[type="text"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+outline: none;
+    border-radius: 5px;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+    width: 320px;
+
+}
+
+.wrap input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+      border-radius: 5px;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+    width: 320px;
+
+}
+
+
+
+
+
+
 </style>
 	<div class = "wrap" >
-		<h2> Login</h2>
-		<br>
-		<label>Username</label>
-		<input type = "text" name = "username" placeholder ="Your username ...">
+
+<font color="white">
+		<h1 > Login</h1>
+		<form>
+
+		<p  id="1"><b>Username</b></p>
+		<input type = "text"   name = "username" placeholder ="   Enter Username" > 
 		<br>
 		<br>
 
-		<label>Password</label>
-		<input type = "password" name = "username" placeholder ="Your password ...">
+		 <p id ="2" ><b>Password</b></p>
+		<input type = "password" name = "password" placeholder ="   Enter Password">
 		<br>
 		<br>
-		<button class ="btn-login">Login</button>
+
+		<center>
+		<button class ="btn btn-primary"> <b>  Login </b></button>
+	</center>	
+	</form>
+		</font>
+
 	</div>
 
 </body>
