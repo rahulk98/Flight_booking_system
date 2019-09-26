@@ -1,0 +1,36 @@
+CREATE TABLE registered_users(
+	user_id SERIAL PRIMARY KEY,
+	username VARCHAR (50) UNIQUE NOT NULL,
+	password VARCHAR (50) NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(355) UNIQUE NOT NULL,
+	phone INTEGER UNIQUE NOT NULL);
+
+CREATE TABLE flights(
+	flight_no VARCHAR(20) UNIQUE NOT NULL,
+	airline_name VARCHAR(40),
+	source VARCHAR(30) NOT NULL,
+	destination VARCHAR(30) NOT NULL,
+	departure_time TIME NOT NULL,
+	arrival_time TIME NOT NULL
+	);
+
+CREATE TABLE bookings(
+	booking_id SERIAL PRIMARY KEY,
+	transaction_id INTEGER REFERENCES transactions(transaction_id) on update CASCADE on delete CASCADE,
+	flight_no VARCHAR(20) REFERENCES flights(flight_no) on update CASCADE on delete CASCADE,
+	user_id INTEGER REFERENCES registered_users(user_id) on update CASCADE on delete CASCADE,
+	amount INTEGER NOT NULL,
+	date_of_travel DATE NOT NULL
+	);
+
+CREATE TABLE wallet(
+	wallet_id SERIAL PRIMARY KEY,
+	username VARCHAR(50) REFERENCES registered_users(username) on update CASCADE on delete CASCADE,
+	balance INTEGER DEFAULT 0);
+
+CREATE TABLE transactions(
+	transaction_id SERIAL PRIMARY KEY,
+	wallet_id INTEGER REFERENCES wallet(wallet_id) on update CASCADE on delete CASCADE,
+	user_id INTEGER REFERENCES registered_users(user_id) on update CASCADE on delete CASCADE,
+	amount INTEGER NOT NULL);
