@@ -15,7 +15,8 @@ CREATE TABLE flights(
 	arrival_time TIME NOT NULL,
 	price INTEGER NOT NULL,
 	no_of_seats_available INTEGER NOT NULL,
-	flight_type VARCHAR(20)
+	flight_type VARCHAR(20),
+	time_of_flight INTEGER NOT NULL
 	);
 
 CREATE TABLE bookings(
