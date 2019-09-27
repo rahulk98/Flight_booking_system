@@ -12,7 +12,9 @@ CREATE TABLE flights(
 	source VARCHAR(30) NOT NULL,
 	destination VARCHAR(30) NOT NULL,
 	departure_time TIME NOT NULL,
-	arrival_time TIME NOT NULL
+	arrival_time TIME NOT NULL,
+	price INTEGER NOT NULL,
+	no_of_seats_available INTEGER NOT NULL
 	);
 
 CREATE TABLE bookings(
@@ -21,8 +23,16 @@ CREATE TABLE bookings(
 	flight_no VARCHAR(20) REFERENCES flights(flight_no) on update CASCADE on delete CASCADE,
 	user_id INTEGER REFERENCES registered_users(user_id) on update CASCADE on delete CASCADE,
 	amount INTEGER NOT NULL,
-	date_of_travel DATE NOT NULL
+	date_of_travel DATE NOT NULL,
+	no_of_travellers INTEGER NOT NULL
 	);
+
+CREATE TABLE tickets(
+	ticket_id SERIAL PRIMARY KEY,
+	booking_id INTEGER REFERENCES bookings(booking_id) on update CASCADE on delete CASCADE
+	name VARCHAR(10),
+	dob VARCHAR(10)
+);
 
 CREATE TABLE wallet(
 	wallet_id SERIAL PRIMARY KEY,
