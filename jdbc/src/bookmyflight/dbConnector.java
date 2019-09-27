@@ -1,25 +1,49 @@
 package bookmyflight;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 
 public class dbConnector {
 	
-	public static void main(String[] args) {
-		try(Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bookmyflight", "rahulk","rahulk")){
+	Connection connection;
+
+	public Boolean connect() {
+		try {
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bookmyflight",
+					"rahulk", "rahulk");
+			return true;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public ArrayList<String> getFlight(String source, String destination) {
+		
+		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * from registered_users");
-			System.out.printf("%-30.30s  %-30.30s  %-30.30s  %-30.30s%n", "username", "name","email","phone");
-			while(resultSet.next()) {
-				System.out.printf("%-30.30s  %-30.30s  %-30.30s  %-30.30s%n", 
-							resultSet.getString("username"), resultSet.getString("name"), resultSet.getString("email"), resultSet.getString("phone"));
+			ArrayList<String> data = new ArrayList<>();
+			ResultSet result = statement.executeQuery("SELECT flight_id, airline_name, arrival_time, departure_time from flights where source = "+source +" and destination = " + destination + "order by price");
+			String temp;
+			while(result.next()) {
+				temp = result.getString("flight_id") + "," + result.getString("airline_name") +"," +  result.getString("arrival_time")+"," + result.getString("departure_time");
+				data.add(temp);
 			}
+			return data;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Connection Failure");
 			e.printStackTrace();
 		}
+		return null;
+		
+	}
+
+	public static void main(String[] args) {
+		dbConnector db = new dbConnector();
+		db.connect();
+		System.out.println(db.getFlight("kochi", "trivandrum").get(0));
 	}
 }
 
