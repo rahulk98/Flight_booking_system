@@ -71,7 +71,9 @@ CREATE TABLE public.flights (
     departure_time time without time zone NOT NULL,
     arrival_time time without time zone NOT NULL,
     price integer NOT NULL,
-    no_of_seats_available integer NOT NULL
+    no_of_seats_available integer NOT NULL,
+    flight_type character varying(20),
+    time_of_flight integer NOT NULL
 );
 
 
@@ -269,7 +271,27 @@ COPY public.bookings (booking_id, transaction_id, flight_no, user_id, amount, da
 -- Data for Name: flights; Type: TABLE DATA; Schema: public; Owner: rahulk
 --
 
-COPY public.flights (flight_no, airline_name, source, destination, departure_time, arrival_time, price, no_of_seats_available) FROM stdin;
+COPY public.flights (flight_no, airline_name, source, destination, departure_time, arrival_time, price, no_of_seats_available, flight_type, time_of_flight) FROM stdin;
+air151	Air India	Coimbatore	Delhi	08:00:00	10:12:00	7500	112	domestic	2
+air249	AirIndia	Kochi	Trivandrum	18:00:00	18:30:00	3000	220	domestic	0
+goa260	GoAir	Kannur	Banglore	13:00:00	14:15:00	2500	98	domestic	1
+ind144	IndiGo	Banglore	Mumbai	09:00:00	10:45:00	2086	156	domestic	1
+spi456	SpiceJet	Kochi	Chennai	07:00:00	09:18:00	2700	56	domestic	2
+air705	AirIndia	Hyderabad	Shimla	01:00:00	11:30:00	9520	60	domestic	11
+ind456	IndiGo	Trivandrum	Goa	23:00:00	02:10:00	5470	34	domestic	3
+ind932	IndiGo	Goa	Delhi	14:00:00	17:25:00	7520	48	domestic	3
+spi124	SpiceJet	Delhi	Chennai	04:00:00	07:45:00	6050	54	domestic	4
+spi070	SpiceJet	Shimla	Banglore	05:00:00	10:20:00	3000	220	domestic	5
+goa180	GoAir	Hyderabad	Banglore	04:00:00	06:50:00	2500	96	domestic	4
+air804	AirIndia	Coimbatore	Delhi	15:00:00	20:25:00	7500	75	domestic	5
+spi974	SpiceJet	Goa	Banglore	17:25:00	18:20:00	1250	60	domestic	1
+tha023	Thai Airways International	Banglore	Dubai	23:50:00	04:10:00	38090	48	international	4
+qat758	Qatar Airways	Delhi	Los Angeles	18:30:00	07:45:00	75800	39	international	13
+emi456	Emirates	Kochi	Sydney	21:20:00	07:35:00	62832	114	international	28
+tha630	Thai Airways International	Dubai	Singapore	20:55:00	11:15:00	35024	178	international	10
+bri753	British Airways	London	Tokyo	13:55:00	10:30:00	50683	78	international	11
+ind080	IndiGo	Hong kong	Banglore	08:50:00	12:45:00	21350	51	international	6
+sin650	Singapore Airlines	New York	Cameron	20:55:00	11:10:00	148121	13	international	26
 \.
 
 
@@ -279,6 +301,16 @@ COPY public.flights (flight_no, airline_name, source, destination, departure_tim
 
 COPY public.registered_users (user_id, username, password, name, email, phone) FROM stdin;
 1	rahulk	rahulk	Rahul	rahul@gmail.com	9400538200
+2	navi	navaneeth@123	Navaneeth S	navisk13@gmail.com	9852147622
+3	varun	varun@007	Varun Sekhar	varun@gmail.com	9876548521
+4	prajal	prajal@123	Prajal P	prajal@gmail.com	9745856632
+5	sathyan	sathyan@123	Sathyan D	sathyan@gmail.com	7852301455
+6	advaith	advaith@123	Advaith H	advaith@gmail.com	7896541252
+7	arun	arun@123	Arun K	arun@gmail.com	6852122214
+8	unni	unni@123	Unni K	unni@gmail.com	8524563222
+9	vishnu	vishnu@123	Vishnu K	vishnu@gmail.com	8787875452
+10	sreeram	sreeram@123	Sreeram P	sreeram@gmail.com	7533321145
+11	sreeraj	sreeraj@123	Sreeraj S	sreeraj@gmail.com	9454581212
 \.
 
 
@@ -303,6 +335,17 @@ COPY public.transactions (transaction_id, wallet_id, user_id, amount) FROM stdin
 --
 
 COPY public.wallet (wallet_id, username, balance) FROM stdin;
+1	rahulk	0
+2	navi	0
+3	varun	0
+4	prajal	0
+5	sathyan	0
+6	advaith	0
+7	arun	0
+8	unni	0
+9	vishnu	0
+10	sreeram	0
+11	sreeraj	0
 \.
 
 
@@ -317,7 +360,7 @@ SELECT pg_catalog.setval('public.bookings_booking_id_seq', 1, false);
 -- Name: registered_users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.registered_users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.registered_users_user_id_seq', 11, true);
 
 
 --
@@ -338,7 +381,7 @@ SELECT pg_catalog.setval('public.transactions_transaction_id_seq', 1, false);
 -- Name: wallet_wallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.wallet_wallet_id_seq', 1, false);
+SELECT pg_catalog.setval('public.wallet_wallet_id_seq', 11, true);
 
 
 --
