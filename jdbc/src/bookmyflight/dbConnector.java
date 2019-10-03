@@ -22,7 +22,7 @@ public class dbConnector {
 
 	public ArrayList<String> getFlight(String source, String destination) {
 		
-		try {
+		try {	
 			Statement statement = connection.createStatement();
 			ArrayList<String> data = new ArrayList<>();
 			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"'"+ "order by price");

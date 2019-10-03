@@ -32,7 +32,7 @@
                 <input type="radio" class="btn" name="check" checked="checked" onclick="formFormat()" id="roundtrip"><span>Roundtrip</span>
                 <input type="radio" class="btn" name="check" onclick="formFormat()" id="oneway"><span>One-way</span>
                 <div class="booking-form">
-                    <form onsubmit="return validation(this);">
+                    <form method="POST" action="search-results">
                         <label>Source city</label>
                         <input type="text" class="form-control" placeholder="City or Airport" name="source">
                         <label>Destination city</label>
@@ -43,25 +43,20 @@
                         </div>
                         <div class="input-grp" id="return_date">
                             <label id="return_label">Date of Return</label>
-                            <input type="date" id="return" class="form-control select-date">
+                            <input type="date" id="return" name = "return_date" class="form-control select-date">
                         </div>
                         <div class="input-grp">
-                            <label>Adults</label>
-
-                            <input type="number" class="form-control" value="1">
+                            <label>No of travellers</label>
+                            <input type="number" name="no_of_travellers" class="form-control" value="1">
                         </div>
-                        <div class="input-grp">
-                            <label>Children</label>
-                            <input type="number" class="form-control" value="0">
-                        </div>
-                        <div class="input-grp">
+                        <!-- <div class="input-grp">
                             <label>Class</label>
                             <select class="custom-select">
                                 <option value="1">Economy class</option>
                                 <option value="2">Business class</option>
                             </select>
 
-                        </div>
+                        </div> -->
                         <div class="input-grp">
                             <button type="submit" class="btn btn-primary " style="margin-left: 10px;"value="Submit">Show
                                 flights</button>
