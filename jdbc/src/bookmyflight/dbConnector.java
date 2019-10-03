@@ -39,11 +39,51 @@ public class dbConnector {
 		return null;
 		
 	}
-
+	
+	public int createUser(String username, String password, String name, String email, String phone) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * from registered_users where username = '"+username+"'");
+			if(result.next()) {
+				return -1;
+			}
+			else {
+				int result2 = statement.executeUpdate("INSERT INTO registered_users (username, password, name, email, phone) VALUES ('"+ username+"','"+password+"','"+name+"','"+email+"','"+phone+"')");
+				return result2;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public Boolean authenticateUser(String username, String password) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("SELECT password from registered_users where username = '"+ username+"'");
+			if(!result.next()) {
+				return false;
+			}
+			else {
+				if(result.getString("password").equals(password)) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		dbConnector db = new dbConnector();
 		db.connect();
-		System.out.println(db.getFlight("Coimbatore", "Delhi").get(0));
+		
+		System.out.println(db.authenticateUser("ample", "sample"));
 	}
 }
 
