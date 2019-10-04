@@ -73,7 +73,8 @@ CREATE TABLE public.flights (
     price integer NOT NULL,
     no_of_seats_available integer NOT NULL,
     flight_type character varying(20),
-    time_of_flight integer NOT NULL
+    arrival_date date,
+    departure_date date
 );
 
 
@@ -271,27 +272,29 @@ COPY public.bookings (booking_id, transaction_id, flight_no, user_id, amount, da
 -- Data for Name: flights; Type: TABLE DATA; Schema: public; Owner: rahulk
 --
 
-COPY public.flights (flight_no, airline_name, source, destination, departure_time, arrival_time, price, no_of_seats_available, flight_type, time_of_flight) FROM stdin;
-air151	Air India	Coimbatore	Delhi	08:00:00	10:12:00	7500	112	domestic	2
-air249	AirIndia	Kochi	Trivandrum	18:00:00	18:30:00	3000	220	domestic	0
-goa260	GoAir	Kannur	Banglore	13:00:00	14:15:00	2500	98	domestic	1
-ind144	IndiGo	Banglore	Mumbai	09:00:00	10:45:00	2086	156	domestic	1
-spi456	SpiceJet	Kochi	Chennai	07:00:00	09:18:00	2700	56	domestic	2
-air705	AirIndia	Hyderabad	Shimla	01:00:00	11:30:00	9520	60	domestic	11
-ind456	IndiGo	Trivandrum	Goa	23:00:00	02:10:00	5470	34	domestic	3
-ind932	IndiGo	Goa	Delhi	14:00:00	17:25:00	7520	48	domestic	3
-spi124	SpiceJet	Delhi	Chennai	04:00:00	07:45:00	6050	54	domestic	4
-spi070	SpiceJet	Shimla	Banglore	05:00:00	10:20:00	3000	220	domestic	5
-goa180	GoAir	Hyderabad	Banglore	04:00:00	06:50:00	2500	96	domestic	4
-air804	AirIndia	Coimbatore	Delhi	15:00:00	20:25:00	7500	75	domestic	5
-spi974	SpiceJet	Goa	Banglore	17:25:00	18:20:00	1250	60	domestic	1
-tha023	Thai Airways International	Banglore	Dubai	23:50:00	04:10:00	38090	48	international	4
-qat758	Qatar Airways	Delhi	Los Angeles	18:30:00	07:45:00	75800	39	international	13
-emi456	Emirates	Kochi	Sydney	21:20:00	07:35:00	62832	114	international	28
-tha630	Thai Airways International	Dubai	Singapore	20:55:00	11:15:00	35024	178	international	10
-bri753	British Airways	London	Tokyo	13:55:00	10:30:00	50683	78	international	11
-ind080	IndiGo	Hong kong	Banglore	08:50:00	12:45:00	21350	51	international	6
-sin650	Singapore Airlines	New York	Cameron	20:55:00	11:10:00	148121	13	international	26
+COPY public.flights (flight_no, airline_name, source, destination, departure_time, arrival_time, price, no_of_seats_available, flight_type, arrival_date, departure_date) FROM stdin;
+air151	AirIndia	Coimbatore	Delhi	08:00:00	10:12:00	7500	112	domestic	2019-12-01	2019-12-01
+ind145	IndiGo	Coimbatore	Delhi	09:00:00	11:22:00	7550	152	domestic	2019-12-01	2019-12-01
+air249	AirIndia	Kochi	Trivandrum	18:00:00	18:30:00	3000	220	domestic	2019-12-01	2019-12-01
+ind146	IndiGo	Kochi	Trivandrum	17:00:00	16:20:00	3587	157	domestic	2019-12-01	2019-12-01
+goa260	GoAir	Kannur	Banglore	13:00:00	14:15:00	2500	98	domestic	2019-12-01	2019-12-01
+ind144	IndiGo	Banglore	Mumbai	09:00:00	10:45:00	2086	156	domestic	2019-12-01	2019-12-01
+spi456	SpiceJet	Kochi	Chennai	07:00:00	09:18:00	2700	56	domestic	2019-12-01	2019-12-01
+air705	AirIndia	Hyderabad	Shimla	01:00:00	11:30:00	9520	60	domestic	2019-12-01	2019-12-01
+ind456	IndiGo	Trivandrum	Goa	23:00:00	02:10:00	5470	34	domestic	2019-12-02	2019-12-01
+ind932	IndiGo	Goa	Delhi	14:00:00	17:25:00	7520	48	domestic	2019-12-01	2019-12-01
+spi124	SpiceJet	Delhi	Chennai	04:00:00	07:45:00	6050	54	domestic	2019-12-01	2019-12-01
+spi070	SpiceJet	Shimla	Banglore	05:00:00	10:20:00	3000	220	domestic	2019-12-01	2019-12-01
+goa180	GoAir	Hyderabad	Banglore	04:00:00	06:50:00	2500	96	domestic	2019-12-01	2019-12-01
+air804	AirIndia	Coimbatore	Delhi	15:00:00	20:25:00	7500	75	domestic	2019-12-01	2019-12-01
+spi974	SpiceJet	Goa	Banglore	17:25:00	18:20:00	1250	60	domestic	2019-12-01	2019-12-01
+tha023	Thai Airways International	Banglore	Dubai	23:50:00	04:10:00	38090	48	international	2019-12-02	2019-12-01
+qat758	Qatar Airways	Delhi	Los Angeles	18:30:00	07:45:00	75800	39	international	2019-12-02	2019-12-01
+emi456	Emirates	Kochi	Sydney	21:20:00	07:35:00	62832	114	international	2019-12-02	2019-12-01
+tha630	Thai Airways International	Dubai	Singapore	20:55:00	11:15:00	35024	178	international	2019-12-01	2019-12-01
+bri753	British Airways	London	Tokyo	13:55:00	10:30:00	50683	78	international	2019-12-02	2019-12-01
+ind080	IndiGo	Hong kong	Banglore	08:50:00	12:45:00	21350	51	international	2019-12-01	2019-12-01
+sin650	Singapore Airlines	New York	Cameron	20:55:00	11:10:00	148121	13	international	2019-12-02	2019-12-01
 \.
 
 
@@ -311,6 +314,7 @@ COPY public.registered_users (user_id, username, password, name, email, phone) F
 9	vishnu	vishnu@123	Vishnu K	vishnu@gmail.com	8787875452
 10	sreeram	sreeram@123	Sreeram P	sreeram@gmail.com	7533321145
 11	sreeraj	sreeraj@123	Sreeraj S	sreeraj@gmail.com	9454581212
+13	sample	sampple	sample	sample@gmail.com	8688483833
 \.
 
 
@@ -360,7 +364,7 @@ SELECT pg_catalog.setval('public.bookings_booking_id_seq', 1, false);
 -- Name: registered_users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.registered_users_user_id_seq', 11, true);
+SELECT pg_catalog.setval('public.registered_users_user_id_seq', 14, true);
 
 
 --
