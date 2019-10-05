@@ -48,10 +48,20 @@ public class dbConnector {
 	public int createUser(String username, String password, String name, String email, String phone) {
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * from registered_users where username = '"+username+"'");
-			if(result.next()) {
-				return -1;
+			ResultSet result1 = statement.executeQuery("SELECT * from registered_users where username = '"+username+"' or "+"email = '"+email+"'" + "or phone = '"+phone+"'");
+			
+			if(result1.next()) {
+				if(result1.getString("username").equals(username)){
+					return -1;
+				}
+				else if(result1.getString("email").equals(email)) {
+					return -2;
+				}
+				else {
+					return -3;
+				}
 			}
+			
 			else {
 				int result2 = statement.executeUpdate("INSERT INTO registered_users (username, password, name, email, phone) VALUES ('"+ username+"','"+password+"','"+name+"','"+email+"','"+phone+"')");
 				return result2;
