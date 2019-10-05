@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>addmoney</display-name>
+    <servlet-name>addmoney</servlet-name>
+    <jsp-file>/addmoney.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addmoney</servlet-name>
+    <url-pattern>/addmoney</url-pattern>
+  </servlet-mapping>
 </web-app>
