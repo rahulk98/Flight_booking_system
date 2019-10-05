@@ -25,12 +25,12 @@ public class dbConnector {
 		return false;
 	}
 
-	public ArrayList<String> getFlight(String source, String destination, String date) {
+	public ArrayList<String> getFlight(String source, String destination, String date , int c) {
 		
 		try {
 			Statement statement = connection.createStatement();
 			ArrayList<String> data = new ArrayList<>();
-			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price, arrival_date from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"' and departure_date = '" + date + "' order by price");
+			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price, arrival_date from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"' and departure_date = '" + date + "' and no_of_seats_available > "+ c +"  order by price");
 			String temp;
 			while(result.next()) {
 				temp = result.getString("flight_no") + "," + result.getString("airline_name") +"," +  result.getString("arrival_time")+"," + result.getString("departure_time")+","+result.getString("price")+","+result.getString("arrival_date");

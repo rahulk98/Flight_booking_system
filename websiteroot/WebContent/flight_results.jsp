@@ -117,7 +117,7 @@
             		out.println("<td>"+arr[2]+"</td>");
             		out.println("<td>"+arr[5]+" "+arr[3]+"</td>");
             		out.println("<td>"+arr[4]+"</td>");
-            		out.println("<td><a href=\"\">Book Now</td>");
+            		out.println("<td><a href=\"book?flight=" +arr[0]+ "\">Book Now</td>");
             		out.println("</tr>");	
             	}
             %>
