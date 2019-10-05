@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -48,6 +49,10 @@ public class LoginServlet extends HttpServlet {
 		Boolean val = db.authenticateUser(username, password);
 		request.setAttribute("status", val);
 		if(val==true) {
+			HttpSession session = request.getSession(true); // reuse existing
+
+			session.setAttribute("user", username);
+			session.setMaxInactiveInterval(1200);
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 		}

@@ -27,14 +27,44 @@
             </li>
 
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="signup.html">Signup</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-            </li>
-        </ul>
+        <%
+        	if(session!=null){
+        		if(session.getAttribute("user")!=null){
+        			String username = (String) session.getAttribute("user");
+        			out.println("<ul class=\"navbar-nav ml-auto\">");
+                	out.println("<li class=\"nav-item\">");
+                	out.println("<a class=\"nav-link\" href=\"\">"+ username +"</a>");
+                	out.println("</li>");
+                	out.println("<li class=\"nav-item\">");
+                	out.println("<a class=\"nav-link\" href=\"logout\">logout</a>");
+                	out.println("</li>");
+                	out.println("</ul>");
+        		}
+        		else{
+
+                	out.println("<ul class=\"navbar-nav ml-auto\">");
+                	out.println("<li class=\"nav-item\">");
+                	out.println("<a class=\"nav-link\" href=\"signup.jsp\">Signup</a>");
+                	out.println("</li>");
+                	out.println("<li class=\"nav-item\">");
+                	out.println("<a class=\"nav-link\" href=\"login.jsp\">Login</a>");
+                	out.println("</li>");
+                	out.println("</ul>");
+                }
+        	}
+        	else{
+
+            	out.println("<ul class=\"navbar-nav ml-auto\">");
+            	out.println("<li class=\"nav-item\">");
+            	out.println("<a class=\"nav-link\" href=\"signup.jsp\">Signup</a>");
+            	out.println("</li>");
+            	out.println("<li class=\"nav-item\">");
+            	out.println("<a class=\"nav-link\" href=\"login.jsp\">Login</a>");
+            	out.println("</li>");
+            	out.println("</ul>");
+            }
+        	
+        %>
     </nav>
 
     <div class="search-results-box">

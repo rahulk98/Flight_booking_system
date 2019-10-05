@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -62,6 +63,9 @@ public class SignUpServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		else if(v==1) {
+			HttpSession session = request.getSession(true); // reuse existing
+			session.setAttribute("user", username);
+			session.setMaxInactiveInterval(1200);
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 		}
