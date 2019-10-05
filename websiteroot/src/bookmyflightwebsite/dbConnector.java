@@ -25,15 +25,15 @@ public class dbConnector {
 		return false;
 	}
 
-	public ArrayList<String> getFlight(String source, String destination) {
+	public ArrayList<String> getFlight(String source, String destination, String date) {
 		
 		try {
 			Statement statement = connection.createStatement();
 			ArrayList<String> data = new ArrayList<>();
-			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"'"+ "order by price");
+			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price, arrival_date from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"' and departure_date = '" + date + "' order by price");
 			String temp;
 			while(result.next()) {
-				temp = result.getString("flight_no") + "," + result.getString("airline_name") +"," +  result.getString("arrival_time")+"," + result.getString("departure_time")+","+result.getString("price");
+				temp = result.getString("flight_no") + "," + result.getString("airline_name") +"," +  result.getString("arrival_time")+"," + result.getString("departure_time")+","+result.getString("price")+","+result.getString("arrival_date");
 				data.add(temp);
 			}
 			return data;
@@ -88,7 +88,7 @@ public class dbConnector {
 		dbConnector db = new dbConnector();
 		db.connect();
 		
-		System.out.println(db.authenticateUser("ample", "sample"));
+		System.out.println(db.getFlight("Kochi", "Trivandrum","2019-12-01"));
 	}
 }
 

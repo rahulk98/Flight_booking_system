@@ -69,7 +69,8 @@
                     <th style="color:  #DAF7A6">Flight Name</th>
                     <th style="color:  #DAF7A6">Departure</th>
                     <th style="color:  #DAF7A6">Arrival</th>
-                    <th style="color:  #DAF7A6">Price</th>
+                    <th style="color:  #DAF7A6">Price per person</th>
+                    <th style="color:  #DAF7A6">Booking link</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,8 +85,9 @@
             		out.println("<th scope=\"row\">"+ c +"</th>");
             		out.println("<td>"+arr[0]+"</td>");
             		out.println("<td>"+arr[2]+"</td>");
-            		out.println("<td>"+arr[3]+"</td>");
+            		out.println("<td>"+arr[5]+" "+arr[3]+"</td>");
             		out.println("<td>"+arr[4]+"</td>");
+            		out.println("<td><a href=\"\">Book Now</td>");
             		out.println("</tr>");	
             	}
             %>
