@@ -78,8 +78,8 @@ public class BookingPageServlet extends HttpServlet {
 		String price = request.getParameter("price");
 		String flight_no = request.getParameter("flightno");
 		log(flight_no);
-		db.createBooking(name, dob, gender, Integer.parseInt(price), (String)s.getAttribute("user"), date, flight_no);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		int bid = db.createBooking(name, dob, gender, Integer.parseInt(price), (String)s.getAttribute("user"), date, flight_no);
+		response.sendRedirect("bookConfirmed?id="+bid);
 
 	}
 

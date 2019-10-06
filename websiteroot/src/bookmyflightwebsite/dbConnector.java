@@ -229,6 +229,30 @@ public class dbConnector {
 		}
 		return -1;
 	}
+	public String getFlightName(String fno) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet res = statement.executeQuery("select airline_name from flights where flight_no = '" + fno +"'");
+			res.next();
+			return res.getString("airline_name");
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+	public ResultSet getBookingDetails(String bid) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet res = statement.executeQuery("Select * from bookings where booking_id = " + bid);
+			return res;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
 	public static void main(String[] args) {
 		dbConnector db = new dbConnector();
 		db.connect();
@@ -240,6 +264,32 @@ public class dbConnector {
 //		System.out.println(db.createBooking(n,n2,n3, 1000, "rahulk", "2019-12-01", "air249"));
 		System.out.println(db.updateSeats("air249", 1));
 
+	}
+
+	public String getSource(String fno) {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r=  s.executeQuery("select source from flights where flight_no = '"+fno+"'");
+			r.next();
+			return r.getString("source");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+
+	public String getDestination(String fno) {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r=  s.executeQuery("select destination from flights where flight_no = '"+fno+"'");
+			r.next();
+			return r.getString("destination");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
 	}
 }
 

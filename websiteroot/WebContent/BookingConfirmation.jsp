@@ -131,7 +131,7 @@
                 		out.println("<a href=\"addbalance.jsp\"><button  class=\"btn btn-primary\"> <b> Add money </b></button> </a> ");
                 	}
                 	else{
-                		out.println("<button type = \"submit\" class=\"btn btn-primary\"> <b> Add </b></button>");
+                		out.println("<button type = \"submit\" class=\"btn btn-primary\"> <b> Book </b></button>");
                 	}
                 %>
 
