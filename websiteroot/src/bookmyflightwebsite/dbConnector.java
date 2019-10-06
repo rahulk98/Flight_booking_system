@@ -24,13 +24,27 @@ public class dbConnector {
 		}
 		return false;
 	}
+	
+	public int getPrice(String f) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result1 = statement.executeQuery("SELECT * from flights where flight_no = '"+f +"'");
+			result1.next();
+			return Integer.parseInt(result1.getString("price"));
 
-	public ArrayList<String> getFlight(String source, String destination, String date) {
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<String> getFlight(String source, String destination, String date , int c) {
 		
 		try {
 			Statement statement = connection.createStatement();
 			ArrayList<String> data = new ArrayList<>();
-			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price, arrival_date from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"' and departure_date = '" + date + "' order by price");
+			ResultSet result = statement.executeQuery("SELECT flight_no, airline_name, arrival_time, departure_time, price, arrival_date from flights where source = "+ "'" +source +"'"+" and destination = " +"'"+ destination +"' and departure_date = '" + date + "' and no_of_seats_available > "+ c +"  order by price");
 			String temp;
 			while(result.next()) {
 				temp = result.getString("flight_no") + "," + result.getString("airline_name") +"," +  result.getString("arrival_time")+"," + result.getString("departure_time")+","+result.getString("price")+","+result.getString("arrival_date");
@@ -100,8 +114,10 @@ public class dbConnector {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("SELECT balance from wallet where username = '" + username + "'");
-			result.next();
-			return Integer.parseInt(result.getString("balance"));
+			while(result.next()) {
+				return Integer.parseInt(result.getString("balance"));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -137,10 +153,93 @@ public class dbConnector {
 		}
 		return -1;
 	}
+	public int getWalletID(String username) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("select wallet_id from wallet where username = '" + username + "'");
+			result.next();
+			return Integer.parseInt(result.getString("wallet_id"));
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int createTransaction(String username, int amount) {
+		try {
+			Statement statement = connection.createStatement();
+			int wallet_id = getWalletID(username);
+			int v = statement.executeUpdate("insert into transactions (wallet_id, username, amount) VALUES ("+wallet_id+",'"+username+"', "+amount+")");
+			addBalance(-1*amount, username);
+			ResultSet result = statement.executeQuery("select transaction_id from transactions where username ='" + username + "' and amount = "+amount);
+			result.next();
+			return Integer.parseInt(result.getString("transaction_id"));
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return -1;
+	}
+	public int updateSeats(String flight_no, int c) {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r = s.executeQuery("select no_of_seats_available from flights where flight_no = '" + flight_no +"'");
+			r.next();
+			int v = Integer.parseInt(r.getString("no_of_seats_available"));
+			v = v -c;
+			int v1= s.executeUpdate("update flights set no_of_seats_available = "+ v+ " where flight_no = '" + flight_no +"'");
+			return v1;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return -1;
+	}
+	public int createTicket(int b_id, String name, String dob, String gender) {
+		try {
+			Statement statement = connection.createStatement();
+			int r = statement.executeUpdate("insert into tickets (booking_id, person_name, dob, gender) values ("+b_id+", '" + name +"','" + dob + "','" + gender + "')");
+			return r;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return -1;
+	}
+	public int createBooking(ArrayList<String> name, ArrayList<String> dob, ArrayList<String> gender, int amount, String username, String date, String flight_no) {
+		try {
+			Statement statement = connection.createStatement();
+			int t_id  = createTransaction(username, amount);
+			int v = statement.executeUpdate("insert into bookings (transaction_id, flight_no, amount, date_of_travel, no_of_travellers, username) values ("+t_id+", '"+flight_no+"', "+amount+", '"+date+"',"+name.size()+", '"+username+"')");
+			ResultSet res = statement.executeQuery("select booking_id from bookings where transaction_id = "+t_id);
+			res.next();
+			int b_id = Integer.parseInt(res.getString("booking_id"));
+			int i = 0;
+			while(i<name.size()) {
+				createTicket(b_id, name.get(i), dob.get(i), gender.get(i));
+				i++;
+				
+			}
+			return b_id;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return -1;
+	}
 	public static void main(String[] args) {
 		dbConnector db = new dbConnector();
 		db.connect();
-		db.addBalance(10, "rahulk");
+		ArrayList<String> n = new ArrayList<>();
+		ArrayList<String> n2 = new ArrayList<>();
+		ArrayList<String> n3 = new ArrayList<>();
+		n.add("rahul;");
+		
+//		System.out.println(db.createBooking(n,n2,n3, 1000, "rahulk", "2019-12-01", "air249"));
+		System.out.println(db.updateSeats("air249", 1));
+
 	}
 }
 
