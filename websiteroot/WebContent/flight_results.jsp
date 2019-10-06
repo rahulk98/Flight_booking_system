@@ -23,7 +23,7 @@
 
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">BookMyFlight.com</a>
+                <a class="nav-link" href="index.jsp">BookMyFlight.com</a>
             </li>
 
         </ul>
