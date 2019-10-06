@@ -28,10 +28,10 @@ CREATE TABLE public.bookings (
     booking_id integer NOT NULL,
     transaction_id integer,
     flight_no character varying(20),
-    user_id integer,
     amount integer NOT NULL,
     date_of_travel date NOT NULL,
-    no_of_travellers integer NOT NULL
+    no_of_travellers integer NOT NULL,
+    username character varying(50)
 );
 
 
@@ -90,7 +90,7 @@ CREATE TABLE public.registered_users (
     password character varying(50) NOT NULL,
     name character varying(100) NOT NULL,
     email character varying(355) NOT NULL,
-    phone character varying(10) NOT NULL
+    phone character varying(12) NOT NULL
 );
 
 
@@ -126,7 +126,8 @@ CREATE TABLE public.tickets (
     ticket_id integer NOT NULL,
     booking_id integer,
     person_name character varying(10),
-    dob character varying(10)
+    dob character varying(10),
+    gender character varying(10)
 );
 
 
@@ -161,8 +162,8 @@ ALTER SEQUENCE public.tickets_ticket_id_seq OWNED BY public.tickets.ticket_id;
 CREATE TABLE public.transactions (
     transaction_id integer NOT NULL,
     wallet_id integer,
-    user_id integer,
-    amount integer NOT NULL
+    amount integer NOT NULL,
+    username character varying(50)
 );
 
 
@@ -264,7 +265,9 @@ ALTER TABLE ONLY public.wallet ALTER COLUMN wallet_id SET DEFAULT nextval('publi
 -- Data for Name: bookings; Type: TABLE DATA; Schema: public; Owner: rahulk
 --
 
-COPY public.bookings (booking_id, transaction_id, flight_no, user_id, amount, date_of_travel, no_of_travellers) FROM stdin;
+COPY public.bookings (booking_id, transaction_id, flight_no, amount, date_of_travel, no_of_travellers, username) FROM stdin;
+9	11	air249	3000	2019-12-01	1	rahulk
+10	12	air249	12000	2019-12-01	2	rahulk
 \.
 
 
@@ -275,7 +278,6 @@ COPY public.bookings (booking_id, transaction_id, flight_no, user_id, amount, da
 COPY public.flights (flight_no, airline_name, source, destination, departure_time, arrival_time, price, no_of_seats_available, flight_type, arrival_date, departure_date) FROM stdin;
 air151	AirIndia	Coimbatore	Delhi	08:00:00	10:12:00	7500	112	domestic	2019-12-01	2019-12-01
 ind145	IndiGo	Coimbatore	Delhi	09:00:00	11:22:00	7550	152	domestic	2019-12-01	2019-12-01
-air249	AirIndia	Kochi	Trivandrum	18:00:00	18:30:00	3000	220	domestic	2019-12-01	2019-12-01
 ind146	IndiGo	Kochi	Trivandrum	17:00:00	16:20:00	3587	157	domestic	2019-12-01	2019-12-01
 goa260	GoAir	Kannur	Banglore	13:00:00	14:15:00	2500	98	domestic	2019-12-01	2019-12-01
 ind144	IndiGo	Banglore	Mumbai	09:00:00	10:45:00	2086	156	domestic	2019-12-01	2019-12-01
@@ -295,6 +297,7 @@ tha630	Thai Airways International	Dubai	Singapore	20:55:00	11:15:00	35024	178	in
 bri753	British Airways	London	Tokyo	13:55:00	10:30:00	50683	78	international	2019-12-02	2019-12-01
 ind080	IndiGo	Hong kong	Banglore	08:50:00	12:45:00	21350	51	international	2019-12-01	2019-12-01
 sin650	Singapore Airlines	New York	Cameron	20:55:00	11:10:00	148121	13	international	2019-12-02	2019-12-01
+air249	AirIndia	Kochi	Trivandrum	18:00:00	18:30:00	3000	219	domestic	2019-12-01	2019-12-01
 \.
 
 
@@ -314,7 +317,6 @@ COPY public.registered_users (user_id, username, password, name, email, phone) F
 9	vishnu	vishnu@123	Vishnu K	vishnu@gmail.com	8787875452
 10	sreeram	sreeram@123	Sreeram P	sreeram@gmail.com	7533321145
 11	sreeraj	sreeraj@123	Sreeraj S	sreeraj@gmail.com	9454581212
-13	sample	sampple	sample	sample@gmail.com	8688483833
 \.
 
 
@@ -322,7 +324,9 @@ COPY public.registered_users (user_id, username, password, name, email, phone) F
 -- Data for Name: tickets; Type: TABLE DATA; Schema: public; Owner: rahulk
 --
 
-COPY public.tickets (ticket_id, booking_id, person_name, dob) FROM stdin;
+COPY public.tickets (ticket_id, booking_id, person_name, dob, gender) FROM stdin;
+43298	10	rahukl	2019-10-01	male
+43299	10	rahulk	2019-10-17	male
 \.
 
 
@@ -330,7 +334,9 @@ COPY public.tickets (ticket_id, booking_id, person_name, dob) FROM stdin;
 -- Data for Name: transactions; Type: TABLE DATA; Schema: public; Owner: rahulk
 --
 
-COPY public.transactions (transaction_id, wallet_id, user_id, amount) FROM stdin;
+COPY public.transactions (transaction_id, wallet_id, amount, username) FROM stdin;
+11	1	3000	rahulk
+12	1	12000	rahulk
 \.
 
 
@@ -339,7 +345,6 @@ COPY public.transactions (transaction_id, wallet_id, user_id, amount) FROM stdin
 --
 
 COPY public.wallet (wallet_id, username, balance) FROM stdin;
-1	rahulk	0
 2	navi	0
 3	varun	0
 4	prajal	0
@@ -349,7 +354,8 @@ COPY public.wallet (wallet_id, username, balance) FROM stdin;
 8	unni	0
 9	vishnu	0
 10	sreeram	0
-11	sreeraj	0
+12	sreeraj	0
+1	rahulk	85000
 \.
 
 
@@ -357,35 +363,35 @@ COPY public.wallet (wallet_id, username, balance) FROM stdin;
 -- Name: bookings_booking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.bookings_booking_id_seq', 1, false);
+SELECT pg_catalog.setval('public.bookings_booking_id_seq', 10, true);
 
 
 --
 -- Name: registered_users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.registered_users_user_id_seq', 14, true);
+SELECT pg_catalog.setval('public.registered_users_user_id_seq', 22, true);
 
 
 --
 -- Name: tickets_ticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.tickets_ticket_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tickets_ticket_id_seq', 43299, true);
 
 
 --
 -- Name: transactions_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.transactions_transaction_id_seq', 1, false);
+SELECT pg_catalog.setval('public.transactions_transaction_id_seq', 12, true);
 
 
 --
 -- Name: wallet_wallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rahulk
 --
 
-SELECT pg_catalog.setval('public.wallet_wallet_id_seq', 11, true);
+SELECT pg_catalog.setval('public.wallet_wallet_id_seq', 12, true);
 
 
 --
@@ -477,11 +483,11 @@ ALTER TABLE ONLY public.bookings
 
 
 --
--- Name: bookings bookings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rahulk
+-- Name: bookings bookings_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rahulk
 --
 
 ALTER TABLE ONLY public.bookings
-    ADD CONSTRAINT bookings_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.registered_users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT bookings_username_fkey FOREIGN KEY (username) REFERENCES public.registered_users(username) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -493,11 +499,11 @@ ALTER TABLE ONLY public.tickets
 
 
 --
--- Name: transactions transactions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rahulk
+-- Name: transactions transactions_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rahulk
 --
 
 ALTER TABLE ONLY public.transactions
-    ADD CONSTRAINT transactions_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.registered_users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT transactions_username_fkey FOREIGN KEY (username) REFERENCES public.registered_users(username) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
