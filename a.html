@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +17,7 @@
                 <a class="nav-link" href="index.jsp">BookMyFlight.com</a>
             </li>
 
-        <% String username = (String) session.getAttribute("user");
+        <!-- <% String username = (String) session.getAttribute("user");
         			out.println("<ul class=\"navbar-nav ml-auto\">");
                 	out.println("<li class=\"nav-item\">");
                 	out.println("<a class=\"nav-link\" href=\"\">"+ username +"</a>");
@@ -28,7 +26,7 @@
                 	out.println("<a class=\"nav-link\" href=\"logout\">logout</a>");
                 	out.println("</li>");
                 	out.println("</ul>");
-        %>
+        %> -->
     </nav>
     <br>
     <br>
@@ -96,35 +94,22 @@
             <h1>Enter customer details</h1>
             <form action="book" method="POST">
 
-                <%
-                	int c = Integer.parseInt((String)request.getAttribute("count"));
-                int temp  =c;
-                	while(c!=0){
-                		out.println("<p id=\"1\"><b>Name</b></p>");
-                		out.println("<input type=\"text\" name=\"name"+c + "\" placeholder=\"   Enter customer name\">");
-                		out.println("<br><br>");
-                		out.println("<p id=\"1\"><b>Date of birth</b></p>");
-                		out.println("<input type=\"date\" name=\"dob"+c+"\" placeholder=\"   Enter customer dob\">");
-                		out.println("<br><br>");
-                		out.println("<p id=\"1\"><b>Gender</b></p>");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"male\" checked> Male");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"female\"> Female</input>");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"other\"> Other");
-                		c--;
-                	}
-                	int v1 = Integer.parseInt((String) request.getAttribute("price")) * temp;
-                	int v2 = Integer.parseInt((String) request.getAttribute("wallet"));
-                	out.println("<p> Total amount = " +  v1+ "</p>");
-                	out.println("<p> Wallet balance = " + v2 + "</p>");
-                	if(v2 < v1){
-                		out.println("<a href=\"addbalance.jsp\"><button  class=\"btn btn-primary\"> <b> Add money </b></button> </a> ");
-                	}
-                	else{
-                		out.println("<button type = \"submit\" class=\"btn btn-primary\"> <b> Add </b></button>");
-                	}
-                %>
-
-                    
+                <p id="1"><b>Name</b></p>
+                <input type="text" name="amount" placeholder="   Enter customer name">
+                <br>
+                <br>
+                <p id="1"><b>Date of birth</b></p>
+                <input type="date" name="amount" placeholder="   Enter customer dob">
+                <br>
+                <br>
+                <p id="1"><b>Gender</b></p>
+                <input type="radio" name="gender" value="male" checked> Male<br>
+                <input type="radio" name="gender" value="female"> Female<br>
+                <input type="radio" name="gender" value="other"> Other
+                <br>
+                <br>
+                
+                    <button class="btn btn-primary"> <b> Add </b></button>
             </form>
         </font>
 

@@ -24,7 +24,20 @@ public class dbConnector {
 		}
 		return false;
 	}
+	
+	public int getPrice(String f) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result1 = statement.executeQuery("SELECT * from flights where flight_no = '"+f +"'");
+			return Integer.parseInt(result1.getString("price"));
 
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public ArrayList<String> getFlight(String source, String destination, String date , int c) {
 		
 		try {

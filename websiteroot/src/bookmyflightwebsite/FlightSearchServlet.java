@@ -37,6 +37,7 @@ public class FlightSearchServlet extends HttpServlet {
 		request.setAttribute("date", journey_date);
 		request.setAttribute("source", source);
 		request.setAttribute("destination", destination);
+		request.setAttribute("count", Integer.parseInt(no_of_travellers));
 		RequestDispatcher view = request.getRequestDispatcher("flight_results.jsp");
 		view.forward(request, response);
 	}
