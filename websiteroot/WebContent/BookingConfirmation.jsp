@@ -18,7 +18,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.jsp">BookMyFlight.com</a>
             </li>
-
+	</ul>
         <% String username = (String) session.getAttribute("user");
         			out.println("<ul class=\"navbar-nav ml-auto\">");
                 	out.println("<li class=\"nav-item\">");
@@ -94,26 +94,37 @@
 
         <font color="white">
             <h1>Enter customer details</h1>
-            <form action="book" method="POST">
+            
 
                 <%
-                	int c = Integer.parseInt((String)request.getAttribute("count"));
-                int temp  =c;
-                	while(c!=0){
+                	int c = (int)request.getAttribute("count");
+                int v1 = (int) request.getAttribute("price");
+            	int v2 = (int) request.getAttribute("wallet");
+            	if(v2<v1){
+            		out.println("<form action=\"addMoney.jsp\" method=\"POST\">");
+            	}
+            	else{
+            		out.println("<form action=\"book\" method=\"POST\">");
+            	}
+            	int i=0;
+            	while(i<c){
                 		out.println("<p id=\"1\"><b>Name</b></p>");
-                		out.println("<input type=\"text\" name=\"name"+c + "\" placeholder=\"   Enter customer name\">");
+                		out.println("<input type=\"text\" name=\"pname"+i + "\" placeholder=\"   Enter customer name\">");
                 		out.println("<br><br>");
                 		out.println("<p id=\"1\"><b>Date of birth</b></p>");
-                		out.println("<input type=\"date\" name=\"dob"+c+"\" placeholder=\"   Enter customer dob\">");
+                		out.println("<input type=\"date\" name=\"dob"+i+"\" placeholder=\"   Enter customer dob\">");
                 		out.println("<br><br>");
                 		out.println("<p id=\"1\"><b>Gender</b></p>");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"male\" checked> Male");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"female\"> Female</input>");
-                		out.println("<input type=\"radio\" name=\"gender"+c+"\" value=\"other\"> Other");
-                		c--;
+                		out.println("<input type=\"radio\" name=\"gender"+i+"\" value=\"male\" checked> Male");
+                		out.println("<input type=\"radio\" name=\"gender"+i+"\" value=\"female\"> Female</input>");
+                		out.println("<input type=\"radio\" name=\"gender"+i+"\" value=\"other\"> Other");
+                		out.println("<input type=\"hidden\" name=\"price\" value=\""+ v1+"\" />");
+                		out.println("<input type=\"hidden\" name=\"flightno\" value=\""+ request.getAttribute("flightno")+"\" />");
+                		out.println("<input type=\"hidden\" name=\"date\" value=\""+ request.getAttribute("date")+"\" />");
+                		i++;
                 	}
-                	int v1 = Integer.parseInt((String) request.getAttribute("price")) * temp;
-                	int v2 = Integer.parseInt((String) request.getAttribute("wallet"));
+                	
+                	
                 	out.println("<p> Total amount = " +  v1+ "</p>");
                 	out.println("<p> Wallet balance = " + v2 + "</p>");
                 	if(v2 < v1){
