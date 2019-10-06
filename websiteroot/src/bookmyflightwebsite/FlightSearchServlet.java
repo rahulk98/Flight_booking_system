@@ -32,12 +32,11 @@ public class FlightSearchServlet extends HttpServlet {
 		String no_of_travellers = request.getParameter("no_of_travellers");
 		dbConnector db = new dbConnector();
 		db.connect();
-		ArrayList<String> result = db.getFlight(source, destination, journey_date, Integer.parseInt(no_of_travellers));
+		ArrayList<String> result = db.getFlight(source, destination, journey_date);
 		request.setAttribute("flights", result);
 		request.setAttribute("date", journey_date);
 		request.setAttribute("source", source);
 		request.setAttribute("destination", destination);
-		request.setAttribute("count", Integer.parseInt(no_of_travellers));
 		RequestDispatcher view = request.getRequestDispatcher("flight_results.jsp");
 		view.forward(request, response);
 	}

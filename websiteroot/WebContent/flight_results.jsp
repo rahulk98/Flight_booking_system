@@ -23,7 +23,7 @@
 
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="index.jsp">BookMyFlight.com</a>
+                <a class="nav-link" href="index.html">BookMyFlight.com</a>
             </li>
 
         </ul>
@@ -108,7 +108,6 @@
             	ArrayList<String> result = (ArrayList<String>) request.getAttribute("flights");
             	Iterator itr = result.iterator();
             	int c = 1;
-            	int c1 = Integer.parseInt((String) request.getAttribute("count"));
             	while(itr.hasNext()){
             		out.println("<tr>");
             		String temp =(String) itr.next();
@@ -118,7 +117,7 @@
             		out.println("<td>"+arr[2]+"</td>");
             		out.println("<td>"+arr[5]+" "+arr[3]+"</td>");
             		out.println("<td>"+arr[4]+"</td>");
-            		out.println("<td><a href=\"book?flight=" +arr[0]+"_"+c1+ "\">Book Now</td>");
+            		out.println("<td><a href=\"\">Book Now</td>");
             		out.println("</tr>");	
             	}
             %>
