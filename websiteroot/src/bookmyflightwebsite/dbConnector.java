@@ -278,7 +278,91 @@ public class dbConnector {
 		}
 		return null;
 	}
-
+	
+	public ArrayList<String> getBookingHistory(String username){
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r = s.executeQuery("select * from bookings where username = '" + username +"' order by booking_date DESC");
+			ArrayList<String> data = new ArrayList<>();
+			String temp;
+			while(r.next()) {
+				temp = r.getString("booking_id") + "," + r.getString("flight_no")+ "," + r.getString("amount")+","+ r.getString("date_of_travel") + "," +r.getString("no_of_travellers")+","+ r.getString("booking_date");
+				data.add(temp);
+			}
+			return data;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+	
+	public ArrayList<String> getCompleteBookingHistory(String username){
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r = s.executeQuery("select * from bookings where username = '" + username +"' order by booking_date DESC");
+			ArrayList<String> data = new ArrayList<>();
+			String temp;
+			while(r.next()) {
+				temp = r.getString("booking_id") + "," + getSource(r.getString("flight_no"))+"," + getDestination(r.getString("flight_no")) + "," + r.getString("flight_no")+ "," + r.getString("amount")+","+ r.getString("date_of_travel") + "," +r.getString("no_of_travellers")+","+ r.getString("booking_date");
+			
+				data.add(temp);
+			}
+			return data;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+	
+	public String getUserDetails(String username) {
+		try {
+			Statement s=  connection.createStatement();
+			ResultSet r =s.executeQuery("select * from registered_users where username = '" +username + "'");
+			r.next();
+			return r.getString("name") +"," + r.getString("email") + ","+r.getString("phone");
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+	public ArrayList<String> getTickets(String b_id) {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r = s.executeQuery("select * from tickets where booking_id = '" + b_id +"' order by ticket_id DESC");
+			ArrayList<String> data = new ArrayList<>();
+			String temp;
+			while(r.next()) {
+				temp = r.getString("ticket_id") + "," + r.getString("person_name")+ "," + r.getString("dob")+ "," + r.getString("gender");
+				data.add(temp);
+			}
+			return data;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+	public ArrayList<String> getTransactionHistory(String username) {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet r = s.executeQuery("select * from transactions where username = '" + username +"' order by t_date DESC");
+			ArrayList<String> data = new ArrayList<>();
+			String temp;
+			while(r.next()) {
+				temp = r.getString("transaction_id") + "," + r.getString("amount")+ "," + r.getString("t_date");
+				data.add(temp);
+			}
+			return data;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
 	public String getDestination(String fno) {
 		try {
 			Statement s = connection.createStatement();

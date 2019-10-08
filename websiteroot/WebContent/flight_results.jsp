@@ -33,7 +33,7 @@
         			String username = (String) session.getAttribute("user");
         			out.println("<ul class=\"navbar-nav ml-auto\">");
                 	out.println("<li class=\"nav-item\">");
-                	out.println("<a class=\"nav-link\" href=\"\">"+ username +"</a>");
+                	out.println("<a class=\"nav-link\" href=\"dash\">"+ username +"</a>");
                 	out.println("</li>");
                 	out.println("<li class=\"nav-item\">");
                 	out.println("<a class=\"nav-link\" href=\"logout\">logout</a>");

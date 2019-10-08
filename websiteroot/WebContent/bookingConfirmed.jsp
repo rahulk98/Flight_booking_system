@@ -22,7 +22,7 @@
          <% String username = (String) session.getAttribute("user");
         			out.println("<ul class=\"navbar-nav ml-auto\">");
                 	out.println("<li class=\"nav-item\">");
-                	out.println("<a class=\"nav-link\" href=\"\">"+ username +"</a>");
+                	out.println("<a class=\"nav-link\" href=\"dash\">"+ username +"</a>");
                 	out.println("</li>");
                 	out.println("<li class=\"nav-item\">");
                 	out.println("<a class=\"nav-link\" href=\"logout\">logout</a>");
@@ -109,7 +109,7 @@
             </tr>
             <%
             out.println("<tr>");
-            out.println("<td>"+request.getAttribute("bid") +"</td>");
+            out.println("<td><a href=\"tickets?id="+request.getAttribute("bid")+"\">"+request.getAttribute("bid") +"</a></td>");
             out.println("<td>"+ request.getAttribute("source") +"</td>");
             out.println("<td>"+request.getAttribute("destination") +"</td>");
             out.println("<td>"+ request.getAttribute("airline") +"</td>");

@@ -27,14 +27,15 @@ CREATE TABLE bookings(
 	user_id INTEGER REFERENCES registered_users(user_id) on update CASCADE on delete CASCADE,
 	amount INTEGER NOT NULL,
 	date_of_travel DATE NOT NULL,
-	no_of_travellers INTEGER NOT NULL
+	no_of_travellers INTEGER NOT NULL,
+	booking_date DATE DEFAULT CURRENT_DATE
 	);
 
 CREATE TABLE tickets(
 	ticket_id SERIAL PRIMARY KEY,
 	booking_id INTEGER REFERENCES bookings(booking_id) on update CASCADE on delete CASCADE
-	name VARCHAR(10),
-	dob VARCHAR(10)
+	name VARCHAR(30),
+	dob VARCHAR(20)
 );
 
 CREATE TABLE wallet(
