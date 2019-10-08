@@ -50,21 +50,20 @@
     %>
        <h1><b>Registration</b></h1><br>
       <form action="verify" method="POST" onSubmit="return checkPassword(this);">
-        Username:
+         <label>Username:</label>
         <input type="text" name="username" placeholder="Enter username"><br><br>
-        &nbsp; Name:
+        <label>Name:</label>
         <input type="text" name="name" placeholder="Enter Name"><br><br>
-        &nbsp;Email id:
+        <label>Email id:</label>
         <input type="text" name="email" placeholder="Enter Email id"><br><br>
-        &nbsp;Phone No:
+        <label>Phone No:</label>
         <input type="text" name="phone" placeholder="Enter Phone Number"><br><br>
-        &nbsp;Password:
+        <label>Password:</label>
         <input type="password" name="password1" placeholder="Enter password"><br>
                 <br>
 
-        &nbsp;Confirm password:
+        <label>Confirm password:</label>
         <input type="password" name="password2" placeholder="Enter password"><br>
-        </p>
 
         <br>
         <button type="submit" class="btn btn-primary">Register</button>

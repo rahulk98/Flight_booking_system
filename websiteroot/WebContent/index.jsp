@@ -4,7 +4,6 @@
 
 <head>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/home.js"></script>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
@@ -63,7 +62,7 @@
     <div class="booking-form-box">
 
             <div class="booking-form">
-                <form method="POST" action="search-results">
+                <form method="POST" action="search-results" onSubmit="return validation(this);">
                     <label>Source city</label>
                     <input type="text" class="form-control" placeholder="City or Airport" name="source">
                     <label>Destination city</label>
@@ -84,7 +83,26 @@
                 </form>
             </div>
         </div>
-
+<script>
+function validation(form) {
+    if (form.source.value.length == '') {
+        alert("Source city cannot be empty");
+        form.source.focus();
+        return false;
+    }
+    if (form.destination.value == '') {
+        alert("Destination city cannot be empty");
+        form.destination.focus();
+        return false;
+    }
+    if (form.journey_date.value == '') {
+        alert("Journey date cannot be empty");
+        form.journey_date.focus();
+        return false;
+    }
+    return true;
+    
+}</script>
 </body>
 
 </html>
