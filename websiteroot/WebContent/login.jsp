@@ -130,7 +130,8 @@ if(cookies!=null  ){
 		<% out.println("<input type = \"password\" name = \"password\" placeholder =\"   Enter Password\" value = \""+password+"\" >"); %>
 		<br>
 		<br>
-
+		<p><b>Remember Me</b> </p>
+		<input type="checkbox" name = "rememberMe" value="remember" checked>
 		<center>
 		<button class ="btn btn-primary"> <b>  Login </b></button>
 	</center>	

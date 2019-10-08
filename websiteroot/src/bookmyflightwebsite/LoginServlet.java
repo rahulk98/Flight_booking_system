@@ -51,12 +51,15 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("status", val);
 		if(val==true) {
 			HttpSession session = request.getSession(true); // reuse existing
-			Cookie usern = new Cookie("username", username);
-			Cookie pass = new Cookie("password", password);
-			usern.setMaxAge(12000);
-			pass.setMaxAge(12000);
-			response.addCookie(usern);
-			response.addCookie(pass);
+			if(request.getParameter("rememberMe")!=null) {
+				Cookie usern = new Cookie("username", username);
+				Cookie pass = new Cookie("password", password);
+				usern.setMaxAge(12000);
+				pass.setMaxAge(12000);
+				response.addCookie(usern);
+				response.addCookie(pass);
+			}
+			
 			session.setAttribute("user", username);
 			session.setMaxInactiveInterval(1200);
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
