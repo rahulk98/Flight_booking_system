@@ -103,17 +103,31 @@ if(a!=null){
 		out.println("<p>Username or password incorrect </p>");
 	}	
 }
+Cookie[] cookies = request.getCookies();
+String uname = "";
+String password = "";
+if(cookies!=null  ){
+	if(cookies.length >1)
+	for(int i=0;i<cookies.length;i++){
+		if(cookies[i].getName().equals("username")){
+			uname = cookies[i].getValue();
+		}
+		else if(cookies[i].getName().equals("password")){
+			password = cookies[i].getValue();
+		}
+	}
+}
 %>
 		<h1 > Login</h1>
 		<form action="authenticate" method="POST">
 
 		<p  id="1"><b>Username</b></p>
-		<input type = "text"   name = "username" placeholder ="   Enter Username" > 
+		<% out.println("<input type = \"text\"   name = \"username\" placeholder =\"   Enter Username\"   value = \""+uname+"\">"); %>
 		<br>
 		<br>
 
 		 <p id ="2" ><b>Password</b></p>
-		<input type = "password" name = "password" placeholder ="   Enter Password">
+		<% out.println("<input type = \"password\" name = \"password\" placeholder =\"   Enter Password\" value = \""+password+"\" >"); %>
 		<br>
 		<br>
 
