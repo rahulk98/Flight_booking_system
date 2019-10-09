@@ -10,6 +10,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    
 
   </head>
 
@@ -75,15 +76,22 @@
 function checkPassword(form) { 
     password1 = form.password1.value; 
     password2 = form.password2.value; 
-
+	
+    if(form.username.value.length < 1){
+    	alert("Username should not be empty");
+    	return false;
+    }
+    
     // If password not entered 
-    if (password1 == '') 
+    if (password1 == '') {
         alert ("Please enter Password"); 
-          
+    	return false;
+    }
     // If confirm password not entered 
-    else if (password2 == '') 
+    else if (password2 == '') {
         alert ("Please enter confirm password"); 
-          
+    	return false;
+    }
     // If Not same return False.     
     else if (password1 != password2) { 
         alert ("\nPassword did not match: Please try again...") ;
@@ -92,6 +100,26 @@ function checkPassword(form) {
 	phone = form.phone;
 	if(phone.value.length !=10){
 		alert("Enter 10 digit phone number");
+		return false;
 	}
+	if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)){
+			
+	}
+	else{
+		alert("Please enter proper email id");
+		return false;
+	}
+	if(form.name.length < 1){
+		alert("Please enter name");
+		return false;
+	}
+	if(/^\d{10}$/.test(phone.value)){
+		
+	}
+	else{
+		alert("Phone number should only consist of digits");
+		return false;
+	}
+	
 } 
 </script>

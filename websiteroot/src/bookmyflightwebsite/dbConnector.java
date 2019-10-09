@@ -79,7 +79,7 @@ public class dbConnector {
 				int result2 = statement
 						.executeUpdate("INSERT INTO registered_users (username, password, name, email, phone) VALUES ('"
 								+ username + "','" + password + "','" + name + "','" + email + "','" + phone + "')");
-				int v = statement.executeUpdate("INSERT INTO wallet (username) VALUES ('" + username + "'");
+				int v = statement.executeUpdate("INSERT INTO wallet (username) VALUES ('" + username + "')");
 				return result2;
 			}
 			
