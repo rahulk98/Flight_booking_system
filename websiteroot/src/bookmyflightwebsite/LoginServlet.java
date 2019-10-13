@@ -36,10 +36,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String source = request.getParameter("source");
-		String destination = request.getParameter("destination");
-		String journey_date = request.getParameter("journey_date");
-		String no_of_travellers = request.getParameter("no_of_travellers");
 		dbConnector db = new dbConnector();
 		db.connect();
 

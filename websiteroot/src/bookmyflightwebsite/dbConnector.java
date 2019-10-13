@@ -186,7 +186,7 @@ public class dbConnector {
 			ResultSet r = s.executeQuery("select no_of_seats_available from flights where flight_no = '" + flight_no +"'");
 			r.next();
 			int v = Integer.parseInt(r.getString("no_of_seats_available"));
-			v = v -c;
+			v = v - c;
 			int v1= s.executeUpdate("update flights set no_of_seats_available = "+ v+ " where flight_no = '" + flight_no +"'");
 			return v1;
 			
